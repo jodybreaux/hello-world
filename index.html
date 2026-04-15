@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>App</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #1a1a2e;
+      color: #ffffff;
+      font-family: sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    #main-area {
+      width: 480px;
+      height: 320px;
+      border: 1px solid #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #content {
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+    }
+
+    #controls {
+      display: flex;
+      gap: 16px;
+    }
+
+    button {
+      padding: 10px 32px;
+      font-size: 1rem;
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid #ffffff;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    button:hover {
+      background: #ffffff;
+      color: #1a1a2e;
+    }
+  </style>
+</head>
+<body>
+  <div id="main-area">
+    <span id="content">1</span>
+  </div>
+
+  <div id="controls">
+    <button id="btn-next">Next</button>
+    <button id="btn-random">Random</button>
+  </div>
+
+  <script>
+    const items = Array.from({ length: 20 }, (_, i) => i + 1);
+    let current = 0;
+
+    const content = document.getElementById('content');
+
+    function show(index) {
+      current = index;
+      content.textContent = items[current];
+    }
+
+    document.getElementById('btn-next').addEventListener('click', () => {
+      show((current + 1) % items.length);
+    });
+
+    document.getElementById('btn-random').addEventListener('click', () => {
+      const next = Math.floor(Math.random() * items.length);
+      show(next);
+    });
+  </script>
+</body>
+</html>
